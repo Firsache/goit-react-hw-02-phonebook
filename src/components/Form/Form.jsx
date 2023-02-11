@@ -2,6 +2,7 @@ import { Component } from 'react';
 import { nanoid } from 'nanoid';
 
 import { Section } from 'components/Section/Section';
+import { FormComponent, Label, Span, Input, Button } from './Form.styled';
 
 export class Form extends Component {
   state = {
@@ -31,10 +32,10 @@ export class Form extends Component {
   render() {
     return (
       <Section title="Phonebook">
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            <span>Name</span>
-            <input
+        <FormComponent onSubmit={this.handleSubmit}>
+          <Label>
+            <Span>Name</Span>
+            <Input
               type="text"
               name="name"
               pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -43,10 +44,10 @@ export class Form extends Component {
               value={this.state.name}
               onChange={this.handleInputChange}
             />
-          </label>
-          <label>
-            <span>Number</span>
-            <input
+          </Label>
+          <Label>
+            <Span>Number</Span>
+            <Input
               type="tel"
               name="number"
               pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -55,9 +56,9 @@ export class Form extends Component {
               value={this.state.number}
               onChange={this.handleInputChange}
             />
-          </label>
-          <button type="submit">Add contact</button>
-        </form>
+          </Label>
+          <Button type="submit">Add contact</Button>
+        </FormComponent>
       </Section>
     );
   }

@@ -1,10 +1,12 @@
 import PropTypes from 'prop-types';
 
+import { Label, Span, Input } from 'components/Form/Form.styled';
+
 export function Filter({ value, filterChange }) {
   return (
-    <label>
-      <span>Find contacts by name</span>
-      <input
+    <Label>
+      <Span>Find contacts by name</Span>
+      <Input
         type="text"
         name="filterName"
         pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -13,7 +15,7 @@ export function Filter({ value, filterChange }) {
         value={value}
         onChange={filterChange}
       />
-    </label>
+    </Label>
   );
 }
 Filter.propTrypes = {

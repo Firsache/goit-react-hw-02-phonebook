@@ -1,26 +1,29 @@
 import PropTypes from 'prop-types';
 import { Section } from 'components/Section/Section';
 
+import { List, Item, Text } from './Contacts.styled';
+import { Button } from 'components/Form/Form.styled';
+
 export function Contacts({ contacts, deleteContact, children }) {
   return (
     <Section title="Contacts">
       {children}
-      <ul>
+      <List>
         {contacts.map(({ id, name, number }) => (
-          <li key={id}>
-            <p>
+          <Item key={id}>
+            <Text>
               {name}: <span>{number}</span>
-            </p>
-            <button
+            </Text>
+            <Button
               onClick={() => {
                 deleteContact(number);
               }}
             >
               Delete
-            </button>
-          </li>
+            </Button>
+          </Item>
         ))}
-      </ul>
+      </List>
     </Section>
   );
 }

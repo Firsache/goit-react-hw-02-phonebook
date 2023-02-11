@@ -3,6 +3,9 @@ import { Form } from 'components/Form/Form';
 import { Contacts } from 'components/Contacts/Contacts';
 import { Filter } from 'components/Filter/Filter';
 
+import { Container } from './App.styled';
+import { GlobalStyles } from 'styles/globalStyles.styled';
+
 export class App extends Component {
   state = {
     contacts: [
@@ -15,9 +18,6 @@ export class App extends Component {
   };
 
   addContact = contact => {
-    // const isInclude = this.state.contacts.find(
-    //   el => el.number === contact.number
-    // );
     if (this.state.contacts.some(c => c.number === contact.number)) {
       alert(`Contact ${contact.number} already exists!`);
     } else {
@@ -43,7 +43,7 @@ export class App extends Component {
     );
 
     return (
-      <>
+      <Container>
         <Form onSubmit={this.addContact} />
 
         <Contacts
@@ -52,7 +52,8 @@ export class App extends Component {
         >
           <Filter value={filteredName} filterChange={this.handleFilter} />
         </Contacts>
-      </>
+        <GlobalStyles />
+      </Container>
     );
   }
 }
