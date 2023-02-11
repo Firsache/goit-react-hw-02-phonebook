@@ -2,7 +2,8 @@ import styled from 'styled-components';
 
 export const List = styled.ul`
   margin-top: 20px;
-  width: 400px;
+  padding-top: 10px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
