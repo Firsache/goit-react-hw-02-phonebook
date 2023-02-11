@@ -1,19 +1,10 @@
 import PropTypes from 'prop-types';
 import { Section } from 'components/Section/Section';
 
-export function Contacts({ contacts, deleteContact }) {
+export function Contacts({ contacts, deleteContact, children }) {
   return (
     <Section title="Contacts">
-      <label>
-        <span>Find contacts by name</span>
-        <input
-          type="text"
-          name="name"
-          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-          title=""
-          required
-        />
-      </label>
+      {children}
       <ul>
         {contacts.map(({ id, name, number }) => (
           <li key={id}>
@@ -42,4 +33,6 @@ Contacts.propTypes = {
       number: PropTypes.string.isRequired,
     }).isRequired
   ).isRequired,
+  deleteContact: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
 };
