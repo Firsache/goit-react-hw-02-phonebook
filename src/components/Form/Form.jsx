@@ -1,6 +1,5 @@
 import { Component } from 'react';
 import { nanoid } from 'nanoid';
-// import PropTypes from 'prop-types';
 
 import { Section } from 'components/Section/Section';
 
@@ -46,7 +45,7 @@ export class Form extends Component {
             />
           </label>
           <label>
-            <span>Phone number</span>
+            <span>Number</span>
             <input
               type="tel"
               name="number"
