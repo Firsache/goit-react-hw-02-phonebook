@@ -1,20 +1,15 @@
 import { Component } from 'react';
-// import { nanoid } from 'nanoid';
+import { nanoid } from 'nanoid';
 // import PropTypes from 'prop-types';
 
 import { Section } from 'components/Section/Section';
 
 export class Form extends Component {
   state = {
-    contacts: [
-      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-    ],
     name: '',
     number: '',
   };
+
   handleInputChange = evt => {
     let name = evt.target.name;
     let value = evt.target.value;
@@ -22,14 +17,22 @@ export class Form extends Component {
   };
 
   handleSubmit = evt => {
-    console.log(evt);
     evt.preventDefault();
-    // let id = nanoid();
+    const { name, number } = this.state;
+
+    const contact = {
+      id: nanoid(),
+      name: name,
+      number: number,
+    };
+
+    this.props.onSubmit(contact);
+    this.setState({ name: '', number: '' });
   };
   render() {
     return (
       <Section title="Phonebook">
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <label>
             <span>Name</span>
             <input
@@ -38,6 +41,7 @@ export class Form extends Component {
               pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
               title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
               required
+              value={this.state.name}
               onChange={this.handleInputChange}
             />
           </label>
@@ -49,12 +53,11 @@ export class Form extends Component {
               pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
               title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
               required
+              value={this.state.number}
               onChange={this.handleInputChange}
             />
           </label>
-          <button type="submit" onSuspend={this.handleSubmit}>
-            Add contact
-          </button>
+          <button type="submit">Add contact</button>
         </form>
       </Section>
     );
