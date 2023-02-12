@@ -1,20 +1,21 @@
 import styled from 'styled-components';
 
 export const FormComponent = styled.form`
+  width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 20px;
+  align-items: flex-end;
 `;
 
 export const Label = styled.label`
   display: flex;
   flex-direction: column;
   gap: 5px;
+  padding-bottom: 20px;
 `;
 
 export const Span = styled.span`
-  font-size: 16px;
+  font-size: 18px;
 `;
 export const Input = styled.input`
   padding: 5px 5px 5px 10px;
@@ -22,6 +23,7 @@ export const Input = styled.input`
   border: 2px solid #000000;
   border-radius: 3px;
   background-color: transparent;
+  font-size: 16px;
   transition: border-color 200ms ease-in-out, outline-color 200ms ease-in-out;
 
   &:hover {

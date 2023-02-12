@@ -1,7 +1,7 @@
 import { Component } from 'react';
-import { nanoid } from 'nanoid';
 
 import { Section } from 'components/Section/Section';
+
 import { FormComponent, Label, Span, Input, Button } from './Form.styled';
 
 export class Form extends Component {
@@ -20,13 +20,7 @@ export class Form extends Component {
     evt.preventDefault();
     const { name, number } = this.state;
 
-    const contact = {
-      id: nanoid(),
-      name: name,
-      number: number,
-    };
-
-    this.props.onSubmit(contact);
+    this.props.onSubmit({ name: name.trim(), number });
     this.setState({ name: '', number: '' });
   };
   render() {
