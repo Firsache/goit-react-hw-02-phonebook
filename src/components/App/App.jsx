@@ -1,10 +1,9 @@
 import { Component } from 'react';
-import { Form } from 'components/Form/Form';
-import { Contacts } from 'components/Contacts/Contacts';
-import { Filter } from 'components/Filter/Filter';
+import { nanoid } from 'nanoid';
 
 import { Container } from './App.styled';
 import { GlobalStyles } from 'styles/globalStyles.styled';
+import { Contacts, Form, Filter, Section, Notification } from '../index';
 
 export class App extends Component {
   state = {
@@ -17,41 +16,59 @@ export class App extends Component {
     filteredName: '',
   };
 
-  addContact = contact => {
-    if (this.state.contacts.some(c => c.number === contact.number)) {
-      alert(`Contact ${contact.number} already exists!`);
-    } else {
-      this.setState({ contacts: [contact, ...this.state.contacts] });
+  addContact = ({ name, number }) => {
+    if (this.state.contacts.some(c => c.name === name)) {
+      alert(`Contact ${name} already exists!`);
+      return;
     }
+    if (this.state.contacts.some(c => c.number === number)) {
+      alert(`Contact ${number} already exists!`);
+      return;
+    }
+
+    this.setState({
+      contacts: [{ id: nanoid(4), name, number }, ...this.state.contacts],
+    });
   };
 
-  deleteContact = number => {
-    const newContacts = this.state.contacts.filter(c => c.number !== number);
+  deleteContact = contactId => {
+    const newContacts = this.state.contacts.filter(c => c.id !== contactId);
     this.setState({ contacts: newContacts });
   };
 
   handleFilter = event => {
     this.setState({ filteredName: event.target.value });
   };
+
+  getFilteredContacts = () => {
+    return this.state.contacts.filter(contact =>
+      contact.name.toLowerCase().includes(this.state.filteredName.toLowerCase())
+    );
+  };
+
   render() {
     const { contacts, filteredName } = this.state;
-    const filteredContacts = contacts.filter(contact =>
-      contact.name
-        .toLowerCase()
-        .trim()
-        .includes(filteredName.toLowerCase().trim())
-    );
+    const filteredContacts = this.getFilteredContacts();
 
     return (
       <Container>
         <Form onSubmit={this.addContact} />
-
-        <Contacts
-          contacts={filteredContacts}
-          deleteContact={this.deleteContact}
-        >
-          <Filter value={filteredName} filterChange={this.handleFilter} />
-        </Contacts>
+        <Section title="Contacts">
+          {contacts.length > 0 ? (
+            <Contacts
+              contacts={filteredContacts}
+              deleteContact={this.deleteContact}
+            >
+              {contacts.length > 1 ? (
+                <Filter value={filteredName} filterChange={this.handleFilter} />
+              ) : (
+                ''
+              )}
+            </Contacts>
+          ) : (
+            <Notification message="There are no contacts in the phonebook yet..." />
+          )}
+        </Section>
         <GlobalStyles />
       </Container>
     );

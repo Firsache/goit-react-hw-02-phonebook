@@ -7,7 +7,8 @@ export const Container = styled.div`
   padding-left: 15px;
   padding-right: 15px;
 
-  width: 500px;
+  min-width: 400px;
+  max-width: 550px;
   border-radius: 10px;
   overflow: hidden;
 
