@@ -17,17 +17,18 @@ export class App extends Component {
   };
 
   addContact = ({ name, number }) => {
-    if (this.state.contacts.some(c => c.name === name)) {
+    const { contacts } = this.state;
+    if (contacts.some(c => c.name === name)) {
       alert(`Contact ${name} already exists!`);
       return;
     }
-    if (this.state.contacts.some(c => c.number === number)) {
+    if (contacts.some(c => c.number === number)) {
       alert(`Contact ${number} already exists!`);
       return;
     }
 
     this.setState({
-      contacts: [{ id: nanoid(4), name, number }, ...this.state.contacts],
+      contacts: [{ id: nanoid(4), name, number }, ...contacts],
     });
   };
 
@@ -41,8 +42,9 @@ export class App extends Component {
   };
 
   getFilteredContacts = () => {
-    return this.state.contacts.filter(contact =>
-      contact.name.toLowerCase().includes(this.state.filteredName.toLowerCase())
+    const { contacts, filteredName } = this.state;
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(filteredName.toLowerCase())
     );
   };
 
