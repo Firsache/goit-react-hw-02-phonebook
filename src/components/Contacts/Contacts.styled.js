@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
 export const List = styled.ul`
-  margin-top: 20px;
-  padding-top: 10px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -18,5 +16,5 @@ export const Item = styled.li`
 `;
 
 export const Text = styled.p`
-  font-size: 16px;
+  font-size: 18px;
 `;
